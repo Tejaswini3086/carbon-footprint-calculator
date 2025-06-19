@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Household Carbon Calculator</title>
+    <link rel="stylesheet" href="carboncalculator_CSS.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="carboncalculator_JS.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌱 Carbon Footprint Calculator</h1>
+            <p>Find out your household's environmental impact and get tips to reduce it!</p>
+        </div>
+        <div class="main-content">
+            <div class="input-section">
+                <form id="carbonForm">
+                    <div class="category-header">🏠 Home Energy</div>
+                    <div class="form-group">
+                        <label for="electricity">Monthly Electricity Use (kWh)</label>
+                        <input type="number" id="electricity" name="electricity" min="0" step="1" required placeholder="e.g., 200">
+                    </div>
+                    <div class="form-group">
+                        <label for="gas">Monthly Natural Gas Use (therms)</label>
+                        <input type="number" id="gas" name="gas" min="0" step="0.1" placeholder="e.g., 10">
+                    </div>
+                    <div class="form-group">
+                        <label for="heating">Primary Heating Source</label>
+                        <select id="heating" name="heating" required>
+                            <option value="" disabled selected>Select heating source</option>
+                            <option value="electric">Electric</option>
+                            <option value="gas">Natural Gas</option>
+                            <option value="oil">Heating Oil</option>
+                            <option value="propane">Propane</option>
+                            <option value="wood">Wood</option>
+                        </select>
+                    </div>
+                    <div class="category-header">🚗 Transportation</div>
+                    <div class="form-group">
+                        <label for="carMiles">Monthly Driving Distance (km)</label>
+                        <input type="number" id="carMiles" name="carMiles" min="0" step="1" placeholder="e.g., 1000">
+                    </div>
+                    <div class="form-group">
+                        <label for="carType">Primary Vehicle Type</label>
+                        <select id="carType" name="carType" required>
+                            <option value="" disabled selected>Select vehicle type</option>
+                            <option value="gasoline">Petrol Car</option>
+                            <option value="hybrid">Hybrid Car</option>
+                            <option value="electric">Electric Car</option>
+                            <option value="diesel">Diesel Car</option>
+                            <option value="suv">SUV/Truck</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="flights">Annual Flight Hours</label>
+                        <input type="number" id="flights" name="flights" min="0" step="0.1" placeholder="e.g., 10">
+                    </div>
+                    <div class="category-header">🍽️ Diet & Lifestyle</div>
+                    <div class="form-group">
+                        <label for="diet">Diet Type</label>
+                        <select id="diet" name="diet" required>
+                            <option value="" disabled selected>Select diet type</option>
+                            <option value="omnivore">Omnivore (Meat & Vegetables)</option>
+                            <option value="pescatarian">Pescatarian (Fish & Vegetables)</option>
+                            <option value="vegetarian">Vegetarian</option>
+                            <option value="vegan">Vegan</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="waste">Weekly Waste Bags</label>
+                        <input type="number" id="waste" name="waste" min="0" step="1" placeholder="e.g., 2">
+                    </div>
+                    <div class="form-group">
+                        <label for="recycling">Do you recycle regularly?</label>
+                        <select id="recycling" name="recycling" required>
+                            <option value="" disabled selected>Select recycling habit</option>
+                            <option value="yes">Yes, most items</option>
+                            <option value="some">Some items</option>
+                            <option value="no">No/Rarely</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="calculate-btn">Calculate My Carbon Footprint</button>
+                </form>
+            </div>
+            <div class="results-section">
+                <div id="resultsContainer" class="results-container hidden">
+                    <div class="total-emissions">
+                        <h2 id="totalValue">0</h2>
+                        <p>tons CO₂ per year</p>
+                        <p id="trees">This is like the carbon absorbed by <span id="treeCount">0</span> trees in a year!</p>
+                    </div>
+                    <div class="chart-container">
+                        <h3 class="chart-title">Emissions Breakdown</h3>
+                        <div id="pieChart"></div>
+                        <div id="pieChartLegend" class="pie-chart-legend"></div>
+                    </div>
+                    <div class="chart-container">
+                        <h3 class="chart-title">Monthly Comparison</h3>
+                        <div id="barChart"></div>
+                    </div>
+                    <div class="breakdown-stats" id="breakdownStats"></div>
+                    <div class="recommendations">
+                        <h3>Ways to Reduce Your Footprint</h3>
+                        <div id="recommendations"></div>
+                    </div>
+                    <button id="downloadBtn" class="calculate-btn">Download Report</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="tooltip" class="tooltip"></div>
+</body>
+</html>
